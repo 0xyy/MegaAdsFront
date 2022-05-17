@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-
 import '../../utils/fix-map-icon';
+import { SearchContext } from '../../contexts/search.context';
+
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
 
 export const Map = () => {
+    const {search} = useContext(SearchContext);
+
+    useEffect(() => {
+        // @TODO: Make request to BE TO search for.
+        console.log('Make request to search for', search);
+    }, [search]);
+
     return (
         <div className="map">
-            <MapContainer center={[50.2657152,18.9945008]} zoom={20}>
+            <h1>Search for: {search}</h1>
+            <MapContainer center={[50.2657152, 18.9945008]} zoom={20}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>0penStreetMap</a> & contributors"
                 />
-                <Marker position={[50.2657152,18.9945008]}>
+                <Marker position={[50.2657152, 18.9945008]}>
                     <Popup>
                         <h2>IT.focus</h2>
                         <p>super firma</p>
